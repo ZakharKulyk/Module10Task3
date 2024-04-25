@@ -25,9 +25,21 @@ public class WordCounter {
                 }
             }
         }
-        wordCounterMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .forEach(System.out::println);
+        giveReverseOrder(wordCounterMap);
+
+    }
+    public static void giveReverseOrder(HashMap<String, Integer>map){
+        List<Map.Entry<String,Integer>> list = new ArrayList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+               return  o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        for(Map.Entry<String, Integer>entry:list){
+            System.out.println(entry.getKey()+" "+entry.getValue());
+        }
+
     }
 
 }
